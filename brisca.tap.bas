@@ -1,4 +1,4 @@
-Check 74DD2AD8
+Check B39E0598
 Auto 8224
 
 # Run-time Variables
@@ -69,9 +69,9 @@ Var r: NumFOR = 15, 14, 1, 7520, 2
 7210 PRINT AT y,x; PAPER 7;"7"
 7220 INK 2: PAPER 7: LET yaux=y
 7225 FOR a=1 TO 3
-7230 PRINT AT yaux+1,x;"\a\b": PRINT AT yaux+1,x+6;"\a\b"
-7240 PRINT AT yaux+2,x;"\c\d": PRINT AT yaux+2,x+6;"\c\d"
-7250 PRINT AT yaux+3,x;"\e\f": PRINT AT yaux+3,x+6;"\e\f"
+7230 PRINT AT yaux+1,x+1;"\a\b": PRINT AT yaux+1,x+5;"\a\b"
+7240 PRINT AT yaux+2,x+1;"\c\d": PRINT AT yaux+2,x+5;"\c\d"
+7250 PRINT AT yaux+3,x+1;"\e\f": PRINT AT yaux+3,x+5;"\e\f"
 7252 LET yaux=yaux+4
 7255 NEXT a
 7260 PRINT AT y+4,x+3;"\a\b": PRINT AT y+5,x+3;"\c\d": PRINT AT y+6,x+3;"\e\f"
