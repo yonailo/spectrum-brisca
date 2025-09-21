@@ -1,4 +1,4 @@
-Check 59956AC7
+Check 74DD2AD8
 Auto 8224
 
 # Run-time Variables
@@ -21,7 +21,7 @@ Var psc: Num = 0
 Var csc: Num = 0
 Var stack: Num = 32
 Var yaux: Num = 14
-Var a: NumFOR = 65512, 65511, 1, 9005, 2
+Var a: NumFOR = 4, 3, 1, 7225, 2
 Var c: NumFOR = 30, 29, 1, 7521, 3
 Var r: NumFOR = 15, 14, 1, 7520, 2
 
@@ -67,14 +67,14 @@ Var r: NumFOR = 15, 14, 1, 7520, 2
 7160 RETURN
 7200 REM Card 17 (7 coups)
 7210 PRINT AT y,x; PAPER 7;"7"
-7220 INK 2: INVERSE 1: LET yaux=y
+7220 INK 2: PAPER 7: LET yaux=y
 7225 FOR a=1 TO 3
 7230 PRINT AT yaux+1,x;"\a\b": PRINT AT yaux+1,x+6;"\a\b"
 7240 PRINT AT yaux+2,x;"\c\d": PRINT AT yaux+2,x+6;"\c\d"
 7250 PRINT AT yaux+3,x;"\e\f": PRINT AT yaux+3,x+6;"\e\f"
 7252 LET yaux=yaux+4
 7255 NEXT a
-7260 PRINT AT y+5,x+3;"\a\b": PRINT AT y+6,x+3;"\c\d": PRINT AT y+7,x+3;"\e\f"
+7260 PRINT AT y+4,x+3;"\a\b": PRINT AT y+5,x+3;"\c\d": PRINT AT y+6,x+3;"\e\f"
 7499 RETURN
 7500 REM Cards bg
 7510 FOR c=px TO px+w: PRINT AT py,c; PAPER 7;"\''": NEXT c
