@@ -1,4 +1,4 @@
-Check DBD6BF70
+Check 845021FF
 Auto 8224
 
 # Run-time Variables
@@ -11,7 +11,7 @@ Var faddr5: Num = 63744
 Var faddr6: Num = 64256
 Var faddr7: Num = 64768
 Var font: Num = 0
-Var a: NumFOR = 62208, 62207, 1, 30, 3
+Var a: NumFOR = 65280, 65279, 1, 4130, 3
 
 # End Run-time Variables
 
@@ -489,3 +489,4 @@ Var a: NumFOR = 62208, 62207, 1, 30, 3
 4770 DATA 0,0,0,0,0,0,0,0
 4780 DATA 0,0,0,0,0,0,0,0
 4790 DATA 0,0,0,0,0,0,0,0
+8999 STOP
