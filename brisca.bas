@@ -1,31 +1,37 @@
-Check 71EB33D1
+Check BB18577C
 Auto 8224
 
 # Run-time Variables
 
 Var w: Num = 9
 Var h: Num = 13
-Var x: Num = 22
+Var x: Num = 2
 Var y: Num = 2
 Var t: Num = 0
 Var b: Num = 7
 Var v: Num = 92
 Var user: Num = 128
-Var pos: Num = 3
+Var pos: Num = 2
 Var px: Num = 21
 Var py: Num = 1
 Var psc: Num = 0
 Var csc: Num = 0
 Var stack: Num = 32
-Var card: Num = 21
-Var id: Num = 1
+Var card: Num = 41
+Var id: Num = 12
 Var f: NumArray(7) = 61696, 62208, 62720, 63232, 63744, 64256, 64768
 Var c: NumArray(40, 4) = 6, 0, 600, 61696, 6, 0, 8600, 0, 6, 0, 8200, 0, 6, 0, 8400, 0, 6, 0, 8800, 0, 6, 0, 8000, 0, 6, 0, 9000, 0, 6, 0, 600, 63744, 6, 0, 600, 64256, 6, 0, 600, 64768, 2, 7, 600, 62208, 2, 7, 8600, 0, 2, 7, 8200, 0, 2, 7, 8400, 0, 2, 7, 8800, 0, 2, 7, 8000, 0, 2, 7, 9000, 0, 2, 7, 600, 63744, 2, 7, 600, 64256, 2, 7, 600, 64768, 5, 0, 600, 62720, 5, 0, 8600, 0, 5, 0, 8200, 0, 5, 0, 8400, 0, 5, 0, 8800, 0, 5, 0, 8000, 0, 5, 0, 9000, 0, 5, 0, 600, 63744, 5, 0, 600, 64256, 5, 0, 600, 64768, 0, 7, 600, 63232, 0, 7, 8600, 0, 0, 7, 8200, 0, 0, 7, 8400, 0, 0, 7, 8800, 0, 0, 7, 8000, 0, 0, 7, 9000, 0, 0, 7, 600, 63744, 0, 7, 600, 64256, 0, 7, 600, 64768
 Var a: NumFOR = 0, 7, 1, 290, 2
 Var c: NumFOR = 7, 6, 1, 680, 2
 Var r: NumFOR = 11, 10, 1, 670, 3
-Var i: NumFOR = 19, 40, 3, 160, 2
-Var a$: Str = ""
+Var i: NumFOR = 40, 40, 3, 160, 2
+Var a$: Str = "\m"
+Var b$: Str = "\n"
+Var c$: Str = "\o"
+Var d$: Str = "\p"
+Var e$: Str = "\q"
+Var f$: Str = "\r"
+Var u$: StrArray(40, 6) = "\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r"
 
 # End Run-time Variables
 
@@ -64,19 +70,25 @@ Var a$: Str = ""
  300 IF a=1 THEN LET f(a)=61696
  310 IF a<>1 THEN LET f(a)=f(a-1)+8*64
  320 NEXT a
- 321 REM cards array
+ 321 REM cards numeric array
  322 REM index 1 : card id
  323 REM index 2 :
  324 REM   1 -> ink color
  325 REM   2 -> paper color
  326 REM   3 -> drawing subrutine
  327 REM   4 -> font addr (optional)
- 330 DIM c(40,4)
+ 328 REM Cards string array
+ 329 REM index 1 : card id
+ 330 REM Index 2 : string(6) with
+ 336 REM   \::\:: or \a\b or \g\h or \m\n
+ 337 REM   \::\:: or \c\d or \i\j or \o\p
+ 338 REM   \::\:: or \e\f or \k\l or \q\r
+ 339 DIM c(40,4): DIM u$(40,6)
  340 FOR i=1 TO 40
- 350 IF i<=10 THEN LET a=6: LET b=0
- 360 IF i>10 AND i<=20 THEN LET a=2: LET b=7
- 370 IF i>20 AND i<=30 THEN LET a=5: LET b=0
- 380 IF i>30 AND i<=40 THEN LET a=0: LET b=7
+ 350 IF i<=10 THEN LET a=6: LET b=0: LET u$(i,1 TO 2)="\::\::": LET u$(i,3 TO 4)="\::\::": LET u$(i,5 TO 6)="\::\::"
+ 360 IF i>10 AND i<=20 THEN LET a=2: LET b=7: LET u$(i,1 TO 2)="\a\b": LET u$(i,3 TO 4)="\c\d": LET u$(i,5 TO 6)="\e\f"
+ 370 IF i>20 AND i<=30 THEN LET a=5: LET b=0: LET u$(i,1 TO 2)="\g\h": LET u$(i,3 TO 4)="\i\j": LET u$(i,5 TO 6)="\k\l"
+ 380 IF i>30 AND i<=40 THEN LET a=0: LET b=7: LET u$(i,1 TO 2)="\m\n": LET u$(i,3 TO 4)="\o\p": LET u$(i,5 TO 6)="\q\r"
  390 LET c(i,1)=a: LET c(i,2)=b
  400 NEXT i
  410 LET c(1,3)=600: LET c(1,4)=f(1): LET c(11,3)=600: LET c(11,4)=f(2): LET c(21,3)=600: LET c(21,4)=f(3): LET c(31,3)=600: LET c(31,4)=f(4): LET c(8,3)=600: LET c(8,4)=f(5): LET c(18,3)=600: LET c(18,4)=f(5): LET c(28,3)=600: LET c(28,4)=f(5): LET c(38,3)=600: LET c(38,4)=f(5): LET c(9,3)=600: LET c(9,4)=f(6): LET c(19,3)=600: LET c(19,4)=f(6): LET c(29,3)=600: LET c(29,4)=f(6): LET c(39,3)=600: LET c(39,4)=f(6): LET c(10,3)=600: LET c(10,4)=f(7): LET c(20,3)=600: LET c(20,4)=f(7): LET c(30,3)=600: LET c(30,4)=f(7): LET c(40,3)=600: LET c(40,4)=f(7)
@@ -100,8 +112,9 @@ Var a$: Str = ""
  635 LET id=card-10*INT (card/10)
  636 IF id>7 THEN LET id=id+2
  637 IF id=0 THEN LET id=12
- 640 PRINT AT y,x; INK 0; PAPER 7;id;AT y,x+1;" "
- 650 INK c(card,1): PAPER c(card,2)
+ 640 PRINT AT y,x; INK 0; PAPER 7;id
+ 641 IF id=1 THEN PRINT AT y,x+1; INK 0; PAPER 7;" "
+ 650 INK c(card,1): PAPER c(card,2): LET a$=u$(card,1): LET b$=u$(card,2): LET c$=u$(card,3): LET d$=u$(card,4): LET e$=u$(card,5): LET f$=u$(card,6)
  660 POKE 23607,INT ((c(card,4)-256)/256)
  670 LET v=32: FOR r=1 TO 10
  680 FOR c=1 TO 6
@@ -109,8 +122,9 @@ Var a$: Str = ""
  700 NEXT c
  710 NEXT r
  720 INK 0
- 730 POKE 23607,60
- 731 PRINT AT y+11,x+1; PAPER 7;"      "
+ 725 POKE 23607,60
+ 726 PRINT AT y+11,x+1; PAPER 7;"      "
+ 732 IF id=10 OR id=11 OR id=12 THEN INK c(card,1): PAPER c(card,2): PRINT AT y+1,x+1;a$;b$;AT y+2,x+1;c$;d$;AT y+3,x+1;e$;f$
  740 RETURN
  860 REM Empty card space
  870 REM params
@@ -180,18 +194,18 @@ Var a$: Str = ""
 8005 LET x=x+2: LET y=y+1
 8007 LET id=card-10*INT (card/10)
 8010 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
-8020 INK c(card,1): PAPER c(card,2)
-8040 PRINT AT y+01,x;"\a\b  \a\b"
-8041 PRINT AT y+02,x;"\c\d  \c\d"
-8042 PRINT AT y+03,x;"\e\f  \e\f"
+8020 INK c(card,1): PAPER c(card,2): LET a$=u$(card,1): LET b$=u$(card,2): LET c$=u$(card,3): LET d$=u$(card,4): LET e$=u$(card,5): LET f$=u$(card,6)
+8040 PRINT AT y+01,x;a$;b$;"  ";a$;b$
+8041 PRINT AT y+02,x;c$;d$;"  ";c$;d$
+8042 PRINT AT y+03,x;e$;f$;"  ";e$;f$
 8043 PRINT AT y+04,x;"      "
-8045 PRINT AT y+05,x;"\a\b  \a\b"
-8055 PRINT AT y+06,x;"\c\d  \c\d"
-8065 PRINT AT y+07,x;"\e\f  \e\f"
+8045 PRINT AT y+05,x;a$;b$;"  ";a$;b$
+8055 PRINT AT y+06,x;c$;d$;"  ";c$;d$
+8065 PRINT AT y+07,x;e$;f$;"  ";e$;f$
 8066 PRINT AT y+08,x;"      "
-8067 PRINT AT y+09,x;"\a\b  \a\b"
-8068 PRINT AT y+10,x;"\c\d  \c\d"
-8069 PRINT AT y+11,x;"\e\f  \e\f"
+8067 PRINT AT y+09,x;a$;b$;"  ";a$;b$
+8068 PRINT AT y+10,x;c$;d$;"  ";c$;d$
+8069 PRINT AT y+11,x;e$;f$;"  ";e$;f$
 8090 RETURN
 8200 REM Cards drawing for 3,13,23,33
 8201 REM params :
@@ -200,18 +214,18 @@ Var a$: Str = ""
 8205 LET x=x+2: LET y=y+1
 8207 LET id=card-10*INT (card/10)
 8210 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
-8220 INK c(card,1): PAPER c(card,2):
-8240 PRINT AT y+01,x;"\a\b    "
-8241 PRINT AT y+02,x;"\c\d    "
-8242 PRINT AT y+03,x;"\e\f    "
+8220 INK c(card,1): PAPER c(card,2): LET a$=u$(card,1): LET b$=u$(card,2): LET c$=u$(card,3): LET d$=u$(card,4): LET e$=u$(card,5): LET f$=u$(card,6)
+8240 PRINT AT y+01,x;a$;b$;"    "
+8241 PRINT AT y+02,x;c$;d$;"    "
+8242 PRINT AT y+03,x;e$;f$;"    "
 8243 PRINT AT y+04,x;"      "
-8245 PRINT AT y+05,x;"    \a\b"
-8246 PRINT AT y+06,x;"    \c\d"
-8247 PRINT AT y+07,x;"    \e\f"
+8245 PRINT AT y+05,x;"    ";a$;b$
+8246 PRINT AT y+06,x;"    ";c$;d$
+8247 PRINT AT y+07,x;"    ";e$;f$
 8248 PRINT AT y+08,x;"      "
-8254 PRINT AT y+09,x;"\a\b    "
-8255 PRINT AT y+10,x;"\c\d    "
-8265 PRINT AT y+11,x;"\e\f    "
+8254 PRINT AT y+09,x;a$;b$;"    "
+8255 PRINT AT y+10,x;c$;d$;"    "
+8265 PRINT AT y+11,x;e$;f$;"    "
 8290 RETURN
 8400 REM Cards drawing for 4,14,24,34
 8401 REM params :
@@ -220,18 +234,18 @@ Var a$: Str = ""
 8405 LET x=x+2: LET y=y+1
 8407 LET id=card-10*INT (card/10)
 8410 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
-8420 INK c(card,1): PAPER c(card,2)
-8440 PRINT AT y+01,x;"\a\b  \a\b"
-8441 PRINT AT y+02,x;"\c\d  \c\d"
-8442 PRINT AT y+03,x;"\e\f  \e\f"
+8420 INK c(card,1): PAPER c(card,2): LET a$=u$(card,1): LET b$=u$(card,2): LET c$=u$(card,3): LET d$=u$(card,4): LET e$=u$(card,5): LET f$=u$(card,6)
+8440 PRINT AT y+01,x;a$;b$;"  ";a$;b$
+8441 PRINT AT y+02,x;c$;d$;"  ";c$;d$
+8442 PRINT AT y+03,x;e$;f$;"  ";e$;f$
 8443 PRINT AT y+04,x;"      "
 8444 PRINT AT y+05,x;"      "
 8445 PRINT AT y+06,x;"      "
 8446 PRINT AT y+07,x;"      "
 8447 PRINT AT y+08,x;"      "
-8454 PRINT AT y+09,x;"\a\b  \a\b"
-8455 PRINT AT y+10,x;"\c\d  \c\d"
-8465 PRINT AT y+11,x;"\e\f  \e\f"
+8454 PRINT AT y+09,x;a$;b$;"  ";a$;b$
+8455 PRINT AT y+10,x;c$;d$;"  ";c$;d$
+8465 PRINT AT y+11,x;e$;f$;"  ";e$;f$
 8490 RETURN
 8600 REM Cards drawing for 2,12,22,32
 8601 REM params :
@@ -240,18 +254,18 @@ Var a$: Str = ""
 8605 LET x=x+2: LET y=y+1
 8607 LET id=card-10*INT (card/10)
 8610 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
-8620 INK c(card,1): PAPER c(card,2):
-8640 PRINT AT y+01,x;"  \a\b  "
-8641 PRINT AT y+02,x;"  \c\d  "
-8642 PRINT AT y+03,x;"  \e\f  "
+8620 INK c(card,1): PAPER c(card,2): LET a$=u$(card,1): LET b$=u$(card,2): LET c$=u$(card,3): LET d$=u$(card,4): LET e$=u$(card,5): LET f$=u$(card,6)
+8640 PRINT AT y+01,x;"  ";a$;b$;"  "
+8641 PRINT AT y+02,x;"  ";c$;d$;"  "
+8642 PRINT AT y+03,x;"  ";e$;f$;"  "
 8643 PRINT AT y+04,x;"      "
 8644 PRINT AT y+05,x;"      "
 8645 PRINT AT y+06,x;"      "
 8646 PRINT AT y+07,x;"      "
 8647 PRINT AT y+08,x;"      "
-8648 PRINT AT y+09,x;"  \a\b  "
-8649 PRINT AT y+10,x;"  \c\d  "
-8650 PRINT AT y+11,x;"  \e\f  "
+8648 PRINT AT y+09,x;"  ";a$;b$;"  "
+8649 PRINT AT y+10,x;"  ";c$;d$;"  "
+8650 PRINT AT y+11,x;"  ";e$;f$;"  "
 8690 RETURN
 8800 REM Cards drawing for 5,15,25,35
 8801 REM params :
@@ -260,18 +274,18 @@ Var a$: Str = ""
 8805 LET x=x+2: LET y=y+1
 8807 LET id=card-10*INT (card/10)
 8810 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
-8820 INK c(card,1): PAPER c(card,2)
-8840 PRINT AT y+01,x;"\a\b  \a\b"
-8841 PRINT AT y+02,x;"\c\d  \c\d"
-8842 PRINT AT y+03,x;"\e\f  \e\f"
+8820 INK c(card,1): PAPER c(card,2): LET a$=u$(card,1): LET b$=u$(card,2): LET c$=u$(card,3): LET d$=u$(card,4): LET e$=u$(card,5): LET f$=u$(card,6)
+8840 PRINT AT y+01,x;a$;b$;"  ";a$;b$
+8841 PRINT AT y+02,x;c$;d$;"  ";c$;d$
+8842 PRINT AT y+03,x;e$;f$;"  ";e$;f$
 8843 PRINT AT y+04,x;"      "
-8845 PRINT AT y+05,x;"  \a\b  "
-8855 PRINT AT y+06,x;"  \c\d  "
-8865 PRINT AT y+07,x;"  \e\f  "
+8845 PRINT AT y+05,x;"  ";a$;b$;"  "
+8855 PRINT AT y+06,x;"  ";c$;d$;"  "
+8865 PRINT AT y+07,x;"  ";e$;f$;"  "
 8866 PRINT AT y+08,x;"      "
-8890 PRINT AT y+09,x;"\a\b  \a\b"
-8891 PRINT AT y+10,x;"\c\d  \c\d"
-8892 PRINT AT y+11,x;"\e\f  \e\f"
+8890 PRINT AT y+09,x;a$;b$;"  ";a$;b$
+8891 PRINT AT y+10,x;c$;d$;"  ";c$;d$
+8892 PRINT AT y+11,x;e$;f$;"  ";e$;f$
 8895 RETURN
 9000 REM Cards drawing for 7,17,27,37
 9001 REM params :
@@ -280,16 +294,16 @@ Var a$: Str = ""
 9005 LET x=x+2: LET y=y+1
 9007 LET id=card-10*INT (card/10)
 9010 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
-9020 INK c(card,1): PAPER c(card,2)
-9040 PRINT AT y+01,x;"\a\b  \a\b"
-9041 PRINT AT y+02,x;"\c\d  \c\d"
-9042 PRINT AT y+03,x;"\e\f  \e\f"
-9045 PRINT AT y+04,x;"  \a\b  "
-9055 PRINT AT y+05,x;"\a\b\c\d\a\b"
-9065 PRINT AT y+06,x;"\c\d\e\f\c\d"
-9090 PRINT AT y+07,x;"\e\f  \e\f"
+9020 INK c(card,1): PAPER c(card,2): LET a$=u$(card,1): LET b$=u$(card,2): LET c$=u$(card,3): LET d$=u$(card,4): LET e$=u$(card,5): LET f$=u$(card,6)
+9040 PRINT AT y+01,x;a$;b$;"  ";a$;b$
+9041 PRINT AT y+02,x;c$;d$;"  ";c$;d$
+9042 PRINT AT y+03,x;e$;f$;"  ";e$;f$
+9045 PRINT AT y+04,x;"  ";a$;b$;"  "
+9055 PRINT AT y+05,x;a$;b$;c$;d$;a$;b$
+9065 PRINT AT y+06,x;c$;d$;e$;f$;c$;d$
+9090 PRINT AT y+07,x;e$;f$;"  ";e$;f$
 9091 PRINT AT y+08,x;"      "
-9092 PRINT AT y+09,x;"\a\b  \a\b"
-9093 PRINT AT y+10,x;"\c\d  \c\d"
-9094 PRINT AT y+11,x;"\e\f  \e\f"
+9092 PRINT AT y+09,x;a$;b$;"  ";a$;b$
+9093 PRINT AT y+10,x;c$;d$;"  ";c$;d$
+9094 PRINT AT y+11,x;e$;f$;"  ";e$;f$
 9100 RETURN
