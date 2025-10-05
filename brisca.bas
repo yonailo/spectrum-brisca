@@ -1,4 +1,4 @@
-Check 3C15541C
+Check 71EB33D1
 Auto 8224
 
 # Run-time Variables
@@ -17,15 +17,14 @@ Var py: Num = 1
 Var psc: Num = 0
 Var csc: Num = 0
 Var stack: Num = 32
-Var card: Num = 12
-Var id: Num = 2
-Var yaux: Num = 14
+Var card: Num = 21
+Var id: Num = 1
 Var f: NumArray(7) = 61696, 62208, 62720, 63232, 63744, 64256, 64768
 Var c: NumArray(40, 4) = 6, 0, 600, 61696, 6, 0, 8600, 0, 6, 0, 8200, 0, 6, 0, 8400, 0, 6, 0, 8800, 0, 6, 0, 8000, 0, 6, 0, 9000, 0, 6, 0, 600, 63744, 6, 0, 600, 64256, 6, 0, 600, 64768, 2, 7, 600, 62208, 2, 7, 8600, 0, 2, 7, 8200, 0, 2, 7, 8400, 0, 2, 7, 8800, 0, 2, 7, 8000, 0, 2, 7, 9000, 0, 2, 7, 600, 63744, 2, 7, 600, 64256, 2, 7, 600, 64768, 5, 0, 600, 62720, 5, 0, 8600, 0, 5, 0, 8200, 0, 5, 0, 8400, 0, 5, 0, 8800, 0, 5, 0, 8000, 0, 5, 0, 9000, 0, 5, 0, 600, 63744, 5, 0, 600, 64256, 5, 0, 600, 64768, 0, 7, 600, 63232, 0, 7, 8600, 0, 0, 7, 8200, 0, 0, 7, 8400, 0, 0, 7, 8800, 0, 0, 7, 8000, 0, 0, 7, 9000, 0, 0, 7, 600, 63744, 0, 7, 600, 64256, 0, 7, 600, 64768
-Var a: NumFOR = 4, 3, 1, 9030, 2
-Var c: NumFOR = 30, 29, 1, 920, 3
-Var r: NumFOR = 15, 14, 1, 910, 2
-Var i: NumFOR = 10, 40, 3, 160, 2
+Var a: NumFOR = 0, 7, 1, 290, 2
+Var c: NumFOR = 7, 6, 1, 680, 2
+Var r: NumFOR = 11, 10, 1, 670, 3
+Var i: NumFOR = 19, 40, 3, 160, 2
 Var a$: Str = ""
 
 # End Run-time Variables
@@ -96,13 +95,12 @@ Var a$: Str = ""
  610 REM params:
  620 REM   pos -> 1..3
  630 REM   card -> 1..40
- 631 GO SUB 860
  632 GO SUB 7000
  633 LET x=x+1: LET y=y+1
  635 LET id=card-10*INT (card/10)
  636 IF id>7 THEN LET id=id+2
  637 IF id=0 THEN LET id=12
- 640 PRINT AT y,x; INK 0; PAPER 7;id
+ 640 PRINT AT y,x; INK 0; PAPER 7;id;AT y,x+1;" "
  650 INK c(card,1): PAPER c(card,2)
  660 POKE 23607,INT ((c(card,4)-256)/256)
  670 LET v=32: FOR r=1 TO 10
@@ -112,6 +110,7 @@ Var a$: Str = ""
  710 NEXT r
  720 INK 0
  730 POKE 23607,60
+ 731 PRINT AT y+11,x+1; PAPER 7;"      "
  740 RETURN
  860 REM Empty card space
  870 REM params
@@ -177,113 +176,120 @@ Var a$: Str = ""
 8000 REM Cards drawing for 6,16,26,36
 8001 REM params :
 8002 REM  pos -> 1..3, card : 1..40
-8003 GO SUB 860
 8004 GO SUB 7000
-8005 LET x=x+1: LET y=y+1
+8005 LET x=x+2: LET y=y+1
 8007 LET id=card-10*INT (card/10)
-8010 PRINT AT y,x; INK 0; PAPER 7;id
-8020 INK c(card,1): PAPER c(card,2): LET yaux=y
-8030 FOR a=1 TO 3
-8040 PRINT AT yaux+1,x+1;"\a\b"
-8041 PRINT AT yaux+2,x+1;"\c\d"
-8042 PRINT AT yaux+3,x+1;"\e\f"
-8045 PRINT AT yaux+1,x+5;"\a\b"
-8055 PRINT AT yaux+2,x+5;"\c\d"
-8065 PRINT AT yaux+3,x+5;"\e\f"
-8070 LET yaux=yaux+4
-8080 NEXT a
+8010 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
+8020 INK c(card,1): PAPER c(card,2)
+8040 PRINT AT y+01,x;"\a\b  \a\b"
+8041 PRINT AT y+02,x;"\c\d  \c\d"
+8042 PRINT AT y+03,x;"\e\f  \e\f"
+8043 PRINT AT y+04,x;"      "
+8045 PRINT AT y+05,x;"\a\b  \a\b"
+8055 PRINT AT y+06,x;"\c\d  \c\d"
+8065 PRINT AT y+07,x;"\e\f  \e\f"
+8066 PRINT AT y+08,x;"      "
+8067 PRINT AT y+09,x;"\a\b  \a\b"
+8068 PRINT AT y+10,x;"\c\d  \c\d"
+8069 PRINT AT y+11,x;"\e\f  \e\f"
 8090 RETURN
 8200 REM Cards drawing for 3,13,23,33
 8201 REM params :
 8202 REM  pos -> 1..3, card : 1..40
-8203 GO SUB 860
 8204 GO SUB 7000
-8205 LET x=x+1: LET y=y+1
+8205 LET x=x+2: LET y=y+1
 8207 LET id=card-10*INT (card/10)
-8210 PRINT AT y,x; INK 0; PAPER 7;id
+8210 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
 8220 INK c(card,1): PAPER c(card,2):
-8240 PRINT AT y+1,x+1;"\a\b"
-8241 PRINT AT y+2,x+1;"\c\d"
-8242 PRINT AT y+3,x+1;"\e\f"
-8245 PRINT AT y+4+1,x+5;"\a\b"
-8246 PRINT AT y+4+2,x+5;"\c\d"
-8247 PRINT AT y+4+3,x+5;"\e\f"
-8254 PRINT AT y+8+1,x+1;"\a\b"
-8255 PRINT AT y+8+2,x+1;"\c\d"
-8265 PRINT AT y+8+3,x+1;"\e\f"
+8240 PRINT AT y+01,x;"\a\b    "
+8241 PRINT AT y+02,x;"\c\d    "
+8242 PRINT AT y+03,x;"\e\f    "
+8243 PRINT AT y+04,x;"      "
+8245 PRINT AT y+05,x;"    \a\b"
+8246 PRINT AT y+06,x;"    \c\d"
+8247 PRINT AT y+07,x;"    \e\f"
+8248 PRINT AT y+08,x;"      "
+8254 PRINT AT y+09,x;"\a\b    "
+8255 PRINT AT y+10,x;"\c\d    "
+8265 PRINT AT y+11,x;"\e\f    "
 8290 RETURN
 8400 REM Cards drawing for 4,14,24,34
 8401 REM params :
 8402 REM  pos -> 1..3, card : 1..40
-8403 GO SUB 860
 8404 GO SUB 7000
-8405 LET x=x+1: LET y=y+1
+8405 LET x=x+2: LET y=y+1
 8407 LET id=card-10*INT (card/10)
-8410 PRINT AT y,x; INK 0; PAPER 7;id
-8420 INK c(card,1): PAPER c(card,2): LET yaux=y
-8430 FOR a=1 TO 2
-8440 PRINT AT yaux+1,x+1;"\a\b"
-8441 PRINT AT yaux+2,x+1;"\c\d"
-8442 PRINT AT yaux+3,x+1;"\e\f"
-8445 PRINT AT yaux+1,x+5;"\a\b"
-8455 PRINT AT yaux+2,x+5;"\c\d"
-8465 PRINT AT yaux+3,x+5;"\e\f"
-8470 LET yaux=yaux+8
-8480 NEXT a
+8410 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
+8420 INK c(card,1): PAPER c(card,2)
+8440 PRINT AT y+01,x;"\a\b  \a\b"
+8441 PRINT AT y+02,x;"\c\d  \c\d"
+8442 PRINT AT y+03,x;"\e\f  \e\f"
+8443 PRINT AT y+04,x;"      "
+8444 PRINT AT y+05,x;"      "
+8445 PRINT AT y+06,x;"      "
+8446 PRINT AT y+07,x;"      "
+8447 PRINT AT y+08,x;"      "
+8454 PRINT AT y+09,x;"\a\b  \a\b"
+8455 PRINT AT y+10,x;"\c\d  \c\d"
+8465 PRINT AT y+11,x;"\e\f  \e\f"
 8490 RETURN
 8600 REM Cards drawing for 2,12,22,32
 8601 REM params :
 8602 REM  pos -> 1..3, card : 1..40
-8603 GO SUB 860
 8604 GO SUB 7000
-8605 LET x=x+1: LET y=y+1
+8605 LET x=x+2: LET y=y+1
 8607 LET id=card-10*INT (card/10)
-8610 PRINT AT y,x; INK 0; PAPER 7;id
+8610 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
 8620 INK c(card,1): PAPER c(card,2):
-8640 PRINT AT y+1,x+3;"\a\b"
-8641 PRINT AT y+2,x+3;"\c\d"
-8642 PRINT AT y+3,x+3;"\e\f"
-8645 PRINT AT y+8+1,x+3;"\a\b"
-8646 PRINT AT y+8+2,x+3;"\c\d"
-8647 PRINT AT y+8+3,x+3;"\e\f"
+8640 PRINT AT y+01,x;"  \a\b  "
+8641 PRINT AT y+02,x;"  \c\d  "
+8642 PRINT AT y+03,x;"  \e\f  "
+8643 PRINT AT y+04,x;"      "
+8644 PRINT AT y+05,x;"      "
+8645 PRINT AT y+06,x;"      "
+8646 PRINT AT y+07,x;"      "
+8647 PRINT AT y+08,x;"      "
+8648 PRINT AT y+09,x;"  \a\b  "
+8649 PRINT AT y+10,x;"  \c\d  "
+8650 PRINT AT y+11,x;"  \e\f  "
 8690 RETURN
 8800 REM Cards drawing for 5,15,25,35
 8801 REM params :
 8802 REM  pos -> 1..3, card : 1..40
-8803 GO SUB 860
 8804 GO SUB 7000
-8805 LET x=x+1: LET y=y+1
+8805 LET x=x+2: LET y=y+1
 8807 LET id=card-10*INT (card/10)
-8810 PRINT AT y,x; INK 0; PAPER 7;id
-8820 INK c(card,1): PAPER c(card,2): LET yaux=y
-8830 FOR a=1 TO 2
-8840 PRINT AT yaux+1,x+1;"\a\b"
-8841 PRINT AT yaux+2,x+1;"\c\d"
-8842 PRINT AT yaux+3,x+1;"\e\f"
-8845 PRINT AT yaux+1,x+5;"\a\b"
-8855 PRINT AT yaux+2,x+5;"\c\d"
-8865 PRINT AT yaux+3,x+5;"\e\f"
-8870 LET yaux=yaux+8
-8880 NEXT a
-8890 PRINT AT y+5,x+3;"\a\b": PRINT AT y+6,x+3;"\c\d": PRINT AT y+7,x+3;"\e\f"
+8810 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
+8820 INK c(card,1): PAPER c(card,2)
+8840 PRINT AT y+01,x;"\a\b  \a\b"
+8841 PRINT AT y+02,x;"\c\d  \c\d"
+8842 PRINT AT y+03,x;"\e\f  \e\f"
+8843 PRINT AT y+04,x;"      "
+8845 PRINT AT y+05,x;"  \a\b  "
+8855 PRINT AT y+06,x;"  \c\d  "
+8865 PRINT AT y+07,x;"  \e\f  "
+8866 PRINT AT y+08,x;"      "
+8890 PRINT AT y+09,x;"\a\b  \a\b"
+8891 PRINT AT y+10,x;"\c\d  \c\d"
+8892 PRINT AT y+11,x;"\e\f  \e\f"
 8895 RETURN
 9000 REM Cards drawing for 7,17,27,37
 9001 REM params :
 9002 REM  pos -> 1..3, card : 1..40
-9003 GO SUB 860
 9004 GO SUB 7000
-9005 LET x=x+1: LET y=y+1
+9005 LET x=x+2: LET y=y+1
 9007 LET id=card-10*INT (card/10)
-9010 PRINT AT y,x; INK 0; PAPER 7;id
-9020 INK c(card,1): PAPER c(card,2): LET yaux=y
-9030 FOR a=1 TO 3
-9040 PRINT AT yaux+1,x+1;"\a\b"
-9041 PRINT AT yaux+2,x+1;"\c\d"
-9042 PRINT AT yaux+3,x+1;"\e\f"
-9045 PRINT AT yaux+1,x+5;"\a\b"
-9055 PRINT AT yaux+2,x+5;"\c\d"
-9065 PRINT AT yaux+3,x+5;"\e\f"
-9070 LET yaux=yaux+4
-9080 NEXT a
-9090 PRINT AT y+4,x+3;"\a\b": PRINT AT y+5,x+3;"\c\d": PRINT AT y+6,x+3;"\e\f"
+9010 PRINT AT y,x-1; INK 0; PAPER 7;id;AT y,x;" "
+9020 INK c(card,1): PAPER c(card,2)
+9040 PRINT AT y+01,x;"\a\b  \a\b"
+9041 PRINT AT y+02,x;"\c\d  \c\d"
+9042 PRINT AT y+03,x;"\e\f  \e\f"
+9045 PRINT AT y+04,x;"  \a\b  "
+9055 PRINT AT y+05,x;"\a\b\c\d\a\b"
+9065 PRINT AT y+06,x;"\c\d\e\f\c\d"
+9090 PRINT AT y+07,x;"\e\f  \e\f"
+9091 PRINT AT y+08,x;"      "
+9092 PRINT AT y+09,x;"\a\b  \a\b"
+9093 PRINT AT y+10,x;"\c\d  \c\d"
+9094 PRINT AT y+11,x;"\e\f  \e\f"
 9100 RETURN
