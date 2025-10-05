@@ -1,37 +1,37 @@
-Check BB18577C
+Check 0B09C810
 Auto 8224
 
 # Run-time Variables
 
 Var w: Num = 9
 Var h: Num = 13
-Var x: Num = 2
+Var x: Num = 22
 Var y: Num = 2
 Var t: Num = 0
 Var b: Num = 7
 Var v: Num = 92
 Var user: Num = 128
-Var pos: Num = 2
+Var pos: Num = 3
 Var px: Num = 21
 Var py: Num = 1
 Var psc: Num = 0
 Var csc: Num = 0
 Var stack: Num = 32
-Var card: Num = 41
-Var id: Num = 12
+Var card: Num = 21
+Var id: Num = 1
 Var f: NumArray(7) = 61696, 62208, 62720, 63232, 63744, 64256, 64768
 Var c: NumArray(40, 4) = 6, 0, 600, 61696, 6, 0, 8600, 0, 6, 0, 8200, 0, 6, 0, 8400, 0, 6, 0, 8800, 0, 6, 0, 8000, 0, 6, 0, 9000, 0, 6, 0, 600, 63744, 6, 0, 600, 64256, 6, 0, 600, 64768, 2, 7, 600, 62208, 2, 7, 8600, 0, 2, 7, 8200, 0, 2, 7, 8400, 0, 2, 7, 8800, 0, 2, 7, 8000, 0, 2, 7, 9000, 0, 2, 7, 600, 63744, 2, 7, 600, 64256, 2, 7, 600, 64768, 5, 0, 600, 62720, 5, 0, 8600, 0, 5, 0, 8200, 0, 5, 0, 8400, 0, 5, 0, 8800, 0, 5, 0, 8000, 0, 5, 0, 9000, 0, 5, 0, 600, 63744, 5, 0, 600, 64256, 5, 0, 600, 64768, 0, 7, 600, 63232, 0, 7, 8600, 0, 0, 7, 8200, 0, 0, 7, 8400, 0, 0, 7, 8800, 0, 0, 7, 8000, 0, 0, 7, 9000, 0, 0, 7, 600, 63744, 0, 7, 600, 64256, 0, 7, 600, 64768
 Var a: NumFOR = 0, 7, 1, 290, 2
 Var c: NumFOR = 7, 6, 1, 680, 2
 Var r: NumFOR = 11, 10, 1, 670, 3
-Var i: NumFOR = 40, 40, 3, 160, 2
-Var a$: Str = "\m"
-Var b$: Str = "\n"
-Var c$: Str = "\o"
-Var d$: Str = "\p"
-Var e$: Str = "\q"
-Var f$: Str = "\r"
-Var u$: StrArray(40, 6) = "\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r"
+Var i: NumFOR = 19, 40, 3, 160, 2
+Var b$: Str = "\h"
+Var c$: Str = "\i"
+Var d$: Str = "\j"
+Var e$: Str = "\k"
+Var f$: Str = "\l"
+Var a$: Str = ""
+Var u$: StrArray(40, 6) = "\a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r"
 
 # End Run-time Variables
 
@@ -85,7 +85,7 @@ Var u$: StrArray(40, 6) = "\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\::\:
  338 REM   \::\:: or \e\f or \k\l or \q\r
  339 DIM c(40,4): DIM u$(40,6)
  340 FOR i=1 TO 40
- 350 IF i<=10 THEN LET a=6: LET b=0: LET u$(i,1 TO 2)="\::\::": LET u$(i,3 TO 4)="\::\::": LET u$(i,5 TO 6)="\::\::"
+ 350 IF i<=10 THEN LET a=6: LET b=0: LET u$(i,1 TO 2)="\a\b": LET u$(i,3 TO 4)="\c\d": LET u$(i,5 TO 6)="  "
  360 IF i>10 AND i<=20 THEN LET a=2: LET b=7: LET u$(i,1 TO 2)="\a\b": LET u$(i,3 TO 4)="\c\d": LET u$(i,5 TO 6)="\e\f"
  370 IF i>20 AND i<=30 THEN LET a=5: LET b=0: LET u$(i,1 TO 2)="\g\h": LET u$(i,3 TO 4)="\i\j": LET u$(i,5 TO 6)="\k\l"
  380 IF i>30 AND i<=40 THEN LET a=0: LET b=7: LET u$(i,1 TO 2)="\m\n": LET u$(i,3 TO 4)="\o\p": LET u$(i,5 TO 6)="\q\r"
