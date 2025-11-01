@@ -1,38 +1,10 @@
-Check B6C24117
-Auto 8224
+Check 36731FE7
 
 # Run-time Variables
 
-Var w: Num = 9
-Var h: Num = 13
-Var x: Num = 2
-Var y: Num = 2
-Var t: Num = 0
-Var b: Num = 7
-Var v: Num = 92
-Var p: Num = 7
 Var user: Num = 128
-Var pos: Num = 2
-Var px: Num = 21
-Var py: Num = 1
-Var psc: Num = 0
-Var csc: Num = 0
-Var stack: Num = 32
-Var card: Num = 41
-Var id: Num = 12
-Var f: NumArray(7) = 61696, 62208, 62720, 63232, 63744, 64256, 64768
-Var c: NumArray(40, 4) = 6, 0, 600, 61696, 6, 0, 8600, 0, 6, 0, 8200, 0, 6, 0, 8400, 0, 6, 0, 8800, 0, 6, 0, 8000, 0, 6, 0, 9000, 0, 6, 0, 600, 63744, 6, 0, 600, 64256, 6, 0, 600, 64768, 2, 7, 600, 62208, 2, 7, 8600, 0, 2, 7, 8200, 0, 2, 7, 8400, 0, 2, 7, 8800, 0, 2, 7, 8000, 0, 2, 7, 9000, 0, 2, 7, 600, 63744, 2, 7, 600, 64256, 2, 7, 600, 64768, 5, 0, 600, 62720, 5, 0, 8600, 0, 5, 0, 8200, 0, 5, 0, 8400, 0, 5, 0, 8800, 0, 5, 0, 8000, 0, 5, 0, 9000, 0, 5, 0, 600, 63744, 5, 0, 600, 64256, 5, 0, 600, 64768, 0, 7, 600, 63232, 0, 7, 8600, 0, 0, 7, 8200, 0, 0, 7, 8400, 0, 0, 7, 8800, 0, 0, 7, 8000, 0, 0, 7, 9000, 0, 0, 7, 600, 63744, 0, 7, 600, 64256, 0, 7, 600, 64768
-Var a: NumFOR = 0, 7, 1, 290, 2
-Var c: NumFOR = 7, 6, 1, 680, 2
-Var r: NumFOR = 11, 10, 1, 670, 3
-Var i: NumFOR = 40, 40, 3, 160, 2
-Var a$: Str = "\m"
-Var b$: Str = "\n"
-Var c$: Str = "\o"
-Var d$: Str = "\p"
-Var e$: Str = "\q"
-Var f$: Str = "\r"
-Var u$: StrArray(40, 6) = "\a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\a\b\c\d\e\f\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\g\h\i\j\k\l\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r\m\n\o\p\q\r"
+Var a: NumFOR = 65512, 65511, 1, 1040, 3
+Var a$: Str = "Game developped by Yonailo     "
 
 # End Run-time Variables
 
@@ -50,7 +22,16 @@ Var u$: StrArray(40, 6) = "\a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\
   80 GO SUB 1030
   90 REM Sets up paper colors
  100 BORDER 0: PAPER 4: INK 0: INVERSE 0: CLS
- 110 REM empty all cards
+ 101 PRINT AT 6,0;"Press S to start in server mode"
+ 102 PRINT AT 7,0;"Press C to start in client mode"
+ 105 LET a$="Game developped by Yonailo     "
+ 106 PAUSE 10: LET a$=a$(2 TO )+a$(1)
+ 107 PRINT AT 21,0;a$
+ 108 IF INKEY$="s" THEN GO TO 2000
+ 109 IF INKEY$="c" THEN GO TO 3000
+ 110 GO TO 106
+ 118 STOP
+ 119 REM empty all cards
  120 LET pos=1: GO SUB 860: LET pos=2: GO SUB 860: LET pos=3: GO SUB 860
  130 REM Score and variables
  140 GO SUB 270
@@ -183,6 +164,17 @@ Var u$: StrArray(40, 6) = "\a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\b\c\d  \a\
 1320 DATA 5,5,3,3,1,1,1,1
 1330 DATA 192,192,128,128,128,128,128,128
 1340 RETURN
+2000 REM Server mode
+2010 DIM c(4)
+2020 REM %listen #4,2000
+2030 REM %control #5
+2040 REM PRINT #5;"p"
+2050 REM PRINT "Waiting..."
+2060 REM INPUT #5;a;a$
+2070 REM IF a<>0 THEN GO TO 200
+2080 REM LET a$=INKEY$
+2090 REM IF a$="x" THEN GO TO 700
+3000 REM Client mode
 7000 REM Gets coords from pos
 7001 REM params
 7002 REM   pos : 1..3
