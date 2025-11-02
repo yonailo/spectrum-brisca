@@ -1,7 +1,8 @@
 # spectrum-brisca
 
 Brisca (also known as Berisca) is a popular Spanish card game played by two teams of two with a 40-card Spanish-suited pack.
-The brisca game is a 1 vs 1 networking card's game. 
+
+This brisca game is a 1 vs 1 networking card's game. 
 
 <div style="display: flex; gap: 20px">
 <img src="images/brisca.png" alt="front" width="300">
@@ -43,11 +44,26 @@ The repository's files are :
 
 ```
 ┣ 📁 assets  : binary files for the fonts
+┃ ┣ 🗒 ace_clubs.bin
+┃ ┣ 🗒 ace_coins.bin
+┃ ┣ 🗒 ace_coups.bin
+┃ ┣ 🗒 ace_swords.bin
+┃ ┣ 🗒 fonts.bas
+┃ ┣ 🗒 generic_10.bin
+┃ ┣ 🗒 generic_11.bin
+┃ ┣ 🗒 generic_12.bin
+┃ ┣ 🗒 screen-presentation-by-DOkky.src
 ┣ 📁 images  : images for the README.md
+┃ ┣ 🗒 ...
 ┣ 📁 spectranet : prebuilt images & fuse roms
-┣ 🗒 brisca.bas : brisca BASIC code
-┣ 🗒 brisca.szx : brisca snapshot for developping
-┣ 🗒 brisca.tap : brisca TAP file
+┃ ┣ 📁 fuse
+┃ ┃ ┣ 🗒 roms.zip
+┃ ┣ 📁 spectranet.tuxe.es : TNFS server files
+┃ ┃ ┣ 🗒 boot.zx : autoload file
+┃ ┃ ┣ 🗒 brisca.sna : snashot that boot.zx launches
+┣ 🗒 brisca.bas : BASIC code
+┣ 🗒 brisca.szx : snapshot for developping (not updated)
+┣ 🗒 brisca.tap : TAP file
 ```
 
 # Development
@@ -56,13 +72,16 @@ The game has been developped with [FUSE](https://fuse-emulator.sourceforge.net/)
 
 ![game screenshot](images/image2.png)
 
-Initially I was thinking in making a computer vs player game, but after discovering the exciting world of [spectranet](https://spectranet.bytedelight.com/) I chose to create a networking game.
+Initially I was thinking in making a computer vs player game, but after discovering the exciting world of [spectranet](https://www.bytedelight.com/wp-content/uploads/2023/03/Spectranet-Manual.pdf) I chose to create [a networked game](https://spectranet.bytedelight.com/).
 
 The spectranet hardware allows up to 4 sockets, that includes the listening socket so theoretically only up to 3 clients could be connected. If you have a filesystem already mounted, that also removes one of the available sockets. In order to make things easier, only 2 clients per server are supported.
 
 The [loading screen](assets/screen-presentation-by-D0kky.scr) has been developped by DOk^RA :
 
 ![loading screen](images/image5.png)
+
+From a BASIC break, in order to run in client mode you can issue `RUN 9998`. `RUN 9999` is for running in server mode. The server code starts at line 2000, and the client code at line 3000.
+
 
 ## Custom fonts & UDGs
 
@@ -136,7 +155,7 @@ The communication is made of multiple commandes exchanged between the parties :
 * (s>c) `POINTS P1` / `POINTS P2` + (s>c) `<points>`
 * (s>c) `WIN` / `LOSE` / `DRAW`
 
->(s>c) means "the client sends to the server"
+>(s>c) means "the server sends to the client"
 
 As it is not easy to manipulate strings with the ZX Spectrum, some messages are made of two writes to the communication channel, the first one is the command (i.e. "CARD") and the second write is a value.
 
@@ -144,9 +163,13 @@ The communication from client to server only happens to send to the server the c
 
 ### Issues
 
-If a client does not play of if one of the clients lose communication with the server, the server will wait forever waiting for a card. This could be avoided using the [control socket](https://spectrum.alioth.net/doc/index.php/Guide) (channel #5) in order to give each client a timeout for playing. Sadly there are issues with the control socket implementation. 
+If a client does not play of if one of the clients lose communication with the server, the server will wait forever waiting for a card. This could be avoided using the [control socket](https://spectrum.alioth.net/doc/index.php/Guide) (channel #5) in order to give each client a timeout for playing. 
 
-When the server polls the control socket while waiting for a card from the first client, it works well, but when it is the turn of the other client, the control socket does not receive what the second client sends until the first one has sent something else (which can not occur in the game logic but I have tested it with `telnet`), which desyncronises the game. I have left the code which implements the control socket with a timeout at line 9500, in case it is something related with my setup or spectranet or FUSE versions.
+~~Sadly there are issues with the control socket implementation.~~
+
+~~When the server polls the control socket while waiting for a card from the first client, it works well, but when it is the turn of the other client, the control socket does not receive what the second client sends until the first one has sent something else (which can not occur in the game logic but I have tested it with `telnet`), which desyncronises the game. I have left the code which implements the control socket with a timeout at line 9500, in case it is something related with my setup or spectranet or FUSE versions.~~
+>There is a bug at line 9510, it is missing `PRINT #5;"p"`, this should solve the issue. 
+
 
 In the current implementation, it is not possible to BREAK the server while waiting for client data with `INPUT #6` or `INPUT #7`.
 
@@ -154,17 +177,35 @@ As there is no way of discarding new connections, trying to connect more than 2 
 
 # How to run
 
-The game can be run in client or server mode. The server mode will start listening for connections at port 2000.
+The game can be run in client or server mode. The server mode will start listening for connections at port 2000. The port is not configurable.
 
-You can not play against the computer, the must be two clients and a server.
+You can not play against the computer, there must be two clients and a server.
 
-There is a TNFS server made by me, from where you can spawn the game directly, at the address "spectranet.tuxe.es".
+I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS_server) from where you can spawn the game directly. The following list describes the easiest way to run the game :
 
-From BASIC, in order to run in client mode you can issue `RUN 9998`. `RUN 9999` is for running in server mode.
+1. Open [this file](spectranet\spectranet_setIPandReset.szx) with FUSE.
+2. Configure your local IP address, network mask and gateway.
+3. Connect to my spectranet TNFS server and load the boot program :
+```
+%mount 0,"spectranet.tuxe.es"
+%load ""
+```
+4. Launch the Brisca game pressing "S". The booting code will launch [this SNA file](spectranet\spectranet.tuxe.es\brisca.sna).
+
+5. The Brisca game will ask you to start the game in server mode (listening for clients connections) or in client mode (to play as in a two player's game).
+
+
+You can run three instances of FUSE like this, one running as a server and the other 2 as clients.
+
+If the client(s) and server are located in different computers, make be sure that you can join the server IP address at port 2000. 
+
+>When running the three instances locally, the second client sometimes receives a SOCKET error, in this case running the client again with `RUN 9998` will fix it.
+
+>The instance running the server will PRINT some debugging commands during the game, the most important one is the card's stock.
 
 # Special thanks
 
-This work would have not been possible without the aide of a lot of people. Foremost and first, thanks to `@bkg2k` from the [Recalbox discord server](https://discord.gg/recalbox) for repairing my original ZX Spectrum 48k+ computer.
+This work would have not been possible without the help of a lot of people. Foremost and first, thanks to `@bkg2k` from the [Recalbox discord server](https://discord.gg/recalbox) for repairing my original ZX Spectrum 48k+ computer.
 
 I can not stop here without citing the great and welcomed people from the [ZX Spectrum discord](https://discord.gg/Sj4ZAjKC). They have saved my life multiple times when I was blocked, they have always tried to answer my questions (in a very bad english) even when they were obvious or stupid. They have told me to read-the-fucking-manual in a very kindly way, and I know they are right.
 
