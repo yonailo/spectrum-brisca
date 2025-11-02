@@ -197,7 +197,7 @@ I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS
 
 You can run three instances of FUSE like this, one running as a server and the other 2 as clients.
 
-If the client(s) and server are located in different computers, make be sure that you can join the server IP address at port 2000. 
+If the client(s) and server are located in different computers, please make sure that you can join the server IP address at port 2000. 
 
 >When running the three instances locally, the second client sometimes receives a SOCKET error, in this case running the client again with `RUN 9998` will fix it.
 
