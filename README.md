@@ -146,7 +146,7 @@ The communication from client to server only happens to send to the server the c
 
 If a client does not play of if one of the clients lose communication with the server, the server will wait forever waiting for a card. This could be avoided using the [control socket](https://spectrum.alioth.net/doc/index.php/Guide) (channel #5) in order to give each client a timeout for playing. Sadly there are issues with the control socket implementation. 
 
-When the server polls the control socket while waiting for a card from the first client, it works well, but when it is the turn of the other client, the control socket does not receive what the second client sends until the first one has sent something else (which can not occur in the game logic but I have tested it with `telnet`), which desyncronises the game.
+When the server polls the control socket while waiting for a card from the first client, it works well, but when it is the turn of the other client, the control socket does not receive what the second client sends until the first one has sent something else (which can not occur in the game logic but I have tested it with `telnet`), which desyncronises the game. I have left the code which implements the control socket with a timeout at line 9500, in case it is something related with my setup or spectranet or FUSE versions.
 
 In the current implementation, it is not possible to BREAK the server while waiting for client data with `INPUT #6` or `INPUT #7`.
 
@@ -159,6 +159,8 @@ The game can be run in client or server mode. The server mode will start listeni
 You can not play against the computer, the must be two clients and a server.
 
 There is a TNFS server made by me, from where you can spawn the game directly, at the address "spectranet.tuxe.es".
+
+From BASIC, in order to run in client mode you can issue `RUN 9998`. `RUN 9999` is for running in server mode.
 
 # Special thanks
 
