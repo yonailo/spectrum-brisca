@@ -54,7 +54,7 @@ The repository's files are :
 
 The game has been developped with [FUSE](https://fuse-emulator.sourceforge.net/) for the spectranet integration and with [BasinC](https://arda.kisafilm.org/blog/?p=1480&lang=en) for everything else (fonts creation & cards drawing).
 
-![game screenshot](images\image2.png)
+![game screenshot](images/image2.png)
 
 Initially I was thinking in making a computer vs player game, but after discovering the exciting world of [spectranet](https://spectranet.bytedelight.com/) I chose to create a networking game.
 
@@ -62,7 +62,7 @@ The spectranet hardware allows up to 4 sockets, that includes the listening sock
 
 The [loading screen](assets\screen-presentation-by-D0kky.scr) has been developped by DOk^RA :
 
-![loading screen](images\image5.png)
+![loading screen](images/image5.png)
 
 ## Custom fonts & UDGs
 
