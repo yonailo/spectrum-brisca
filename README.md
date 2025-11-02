@@ -183,14 +183,14 @@ You can not play against the computer, there must be two clients and a server.
 
 I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS_server) from where you can spawn the game directly. The following list describes the easiest way to run the game :
 
-1. Open [this file](spectranet\spectranet_setIPandReset.szx) with FUSE.
+1. Open [this file](spectranet/spectranet_setIPandReset.szx) with FUSE.
 2. Configure your local IP address, network mask and gateway.
 3. Connect to my spectranet TNFS server and load the boot program :
 ```
 %mount 0,"spectranet.tuxe.es"
 %load ""
 ```
-4. Launch the Brisca game pressing "S". The booting code will launch [this SNA file](spectranet\spectranet.tuxe.es\brisca.sna).
+4. Launch the Brisca game pressing "S". The booting code will launch [this SNA file](spectranet/spectranet.tuxe.es/brisca.sna).
 
 5. The Brisca game will ask you to start the game in server mode (listening for clients connections) or in client mode (to play as in a two player's game).
 
