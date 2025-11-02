@@ -58,7 +58,7 @@ The game has been developped with [FUSE](https://fuse-emulator.sourceforge.net/)
 
 Initially I was thinking in making a computer vs player game, but after discovering the exciting world of [spectranet](https://spectranet.bytedelight.com/) I chose to create a networking game.
 
-The spectranet hardware allows up to 4 sockets, that includes the listening socket so theoretically only up to 3 clients could be connected. If you have a filesystem already mounted, that also remove one of the available sockets. In order to make things easier, only 2 clients per server are supported.
+The spectranet hardware allows up to 4 sockets, that includes the listening socket so theoretically only up to 3 clients could be connected. If you have a filesystem already mounted, that also removes one of the available sockets. In order to make things easier, only 2 clients per server are supported.
 
 The [loading screen](assets/screen-presentation-by-D0kky.scr) has been developped by DOk^RA :
 
@@ -71,7 +71,7 @@ Some of the cards are drawn using UDGs and there are 7 cards that are drawn usin
 * 4 Aces (one for each suit)
 * Generic Jack, Knight & King (their suit is added as an UDG)
 
-The available room for each card is a rectagle of 6x10 caracters. In order to simplify the handling of the CHARS system var, each custom font has been padded with 0 up to 64 bytes.
+The available room for each card is a rectagle of 6x10 caracters. In order to simplify the handling of the CHARS system var, each custom font has been padded with 0s up to 64 bytes.
 
 At the beginning of the code, the espace needed for the fonts & UDGs is reserved with CLEAR :
 
@@ -89,7 +89,7 @@ All the drawings have been created with BasinC UDG Character Editor :
 
 ![Ace clubs](images/image4.png)
 
-For the rest of the cards, UDGs are used for drawing. Each suit UDG uses a rectangle of 2x3 chars, so there is not enough room for having the 4 suits (4*2*3 = 24 and there are only 21 UDGs).
+For the rest of the cards, UDGs are used for drawing. Each suit UDG uses a rectangle of 2x3 chars, so there is not enough room for having the 4 suits (4x2x3 = 24 and there are only 21 UDGs).
 
 In order to cope with this limitation, I could have used some of the font's padding for the missing suit, but to simplify I have used the coups suit as a coin suit removing the bottom line (so the coin's suit is made of a grid of 2x2 chars instead of 2x3 as the others). For the generic cards fonts (jacks, knights and kings), the corresponding suit is added as an UDG after drawing them.
 
@@ -121,7 +121,7 @@ In server mode, the game listens on port 2000. It allows only 2 clients, which a
 
 The clients can specify the remote DNS name or IP address in order to connect to the server.
 
-The game starts with at least 2 clients are connected.
+The game starts when at least 2 clients are connected.
 
 ### Message's exchange
 
