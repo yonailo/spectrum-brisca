@@ -60,7 +60,7 @@ Initially I was thinking in making a computer vs player game, but after discover
 
 The spectranet hardware allows up to 4 sockets, that includes the listening socket so theoretically only up to 3 clients could be connected. If you have a filesystem already mounted, that also remove one of the available sockets. In order to make things easier, only 2 clients per server are supported.
 
-The [loading screen](assets\screen-presentation-by-D0kky.scr) has been developped by DOk^RA :
+The [loading screen](assets/screen-presentation-by-D0kky.scr) has been developped by DOk^RA :
 
 ![loading screen](images/image5.png)
 
@@ -111,9 +111,9 @@ The cards are identified with numeric IDs
 
 ## Networking
 
-![networked game](images\image3.png)
+![networked game](images/image3.png)
 
-The game is made to be played with spectranet's rom. At this moment only FUSE supports spectranet's rom. The [procedure described here](https://sourceforge.net/p/fuse-emulator/wiki/Spectranet%20Emulation/) in order to install the spectranet firmware with FUSE does not work with the FUSE 1.6.0. You will find [here](spectranet\spectranet_setIPandReset.szx) a prebuilt snapshot that allows you to configure your IP address and your gateway (NOTE that the FUSE implementation does not support DHCP yet.). You might need to install the [FUSE roms](spectranet\fuse\roms.zip) available within this repository too.
+The game is made to be played with spectranet's rom. At this moment only FUSE supports spectranet's rom. The [procedure described here](https://sourceforge.net/p/fuse-emulator/wiki/Spectranet%20Emulation/) in order to install the spectranet firmware with FUSE does not work with the FUSE 1.6.0. You will find [here](spectranet/spectranet_setIPandReset.szx) a prebuilt snapshot that allows you to configure your IP address and your gateway (NOTE that the FUSE implementation does not support DHCP yet.). You might need to install the [FUSE roms](spectranet/fuse/roms.zip) available within this repository too.
 
 ### Sockets
 
