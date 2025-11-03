@@ -60,9 +60,9 @@ The repository's files are :
 ┃ ┃ ┣ 🗒 roms.zip
 ┃ ┣ 📁 spectranet.tuxe.es : TNFS server files
 ┃ ┃ ┣ 🗒 boot.zx : autoload file
-┃ ┃ ┣ 🗒 brisca.sna : snashot that boot.zx launches
+┃ ┃ ┣ 🗒 brisca.sna : snapshot launched by boot.zx
 ┣ 🗒 brisca.bas : BASIC code
-┣ 🗒 brisca.szx : snapshot for developping (not updated)
+┣ 🗒 brisca.szx : snapshot 
 ┣ 🗒 brisca.tap : TAP file
 ```
 
@@ -128,6 +128,10 @@ The cards are identified with numeric IDs
 * [21..30] : coups suit (21 -> Ace, 28 -> Jack, 29 -> Knight, 30 -> King)
 * [31..40] : coups suit (31 -> Ace, 38 -> Jack, 39 -> Knight, 40 -> King)
 
+In order to improve the randomness of the cards' stock shuffling, there is a `RANDOMIZE 0` just before entering into server mode. 
+
+The server orchestrates both clients. It communicates what the other end has played and it computes the winner at each round. It keeps the points of each party and decides who will play first next. At the end of the game it will send to each party who the winner is, the loser or if there is draw.
+
 ## Networking
 
 ![networked game](images/image3.png)
@@ -140,7 +144,7 @@ In server mode, the game listens on port 2000. It allows only 2 clients, which a
 
 The clients can specify the remote DNS name or IP address in order to connect to the server.
 
-The game starts when at least 2 clients are connected.
+The game starts when at least 2 clients are connected. Both the clients and the server read data using a [control socket](https://spectrum.alioth.net/doc/index.php/Guide) for not blocking waiting for input.
 
 ### Message's exchange
 
@@ -163,17 +167,8 @@ The communication from client to server only happens to send to the server the c
 
 ### Issues
 
-If a client does not play of if one of the clients lose communication with the server, the server will wait forever waiting for a card. This could be avoided using the [control socket](https://spectrum.alioth.net/doc/index.php/Guide) (channel #5) in order to give each client a timeout for playing. 
+In order to not block forever the server waiting for clients to play, a timeout has been implemented. If a client takes more than 30 seconds to send something, the server will abort both connections and it will start over, resetting the game.
 
-~~Sadly there are issues with the control socket implementation.~~
-
-~~When the server polls the control socket while waiting for a card from the first client, it works well, but when it is the turn of the other client, the control socket does not receive what the second client sends until the first one has sent something else (which can not occur in the game logic but I have tested it with `telnet`), which desyncronises the game. I have left the code which implements the control socket with a timeout at line 9500, in case it is something related with my setup or spectranet or FUSE versions.~~
->There is a bug at line 9510, it is missing `PRINT #5;"p"`, this should solve the issue. 
-
-
-In the current implementation, it is not possible to BREAK the server while waiting for client data with `INPUT #6` or `INPUT #7`.
-
-As there is no way of discarding new connections, trying to connect more than 2 clients is undefined.
 
 # How to run
 
@@ -192,16 +187,17 @@ I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS
 ```
 4. Launch the Brisca game pressing "S". The booting code will launch [this SNA file](spectranet/spectranet.tuxe.es/brisca.sna).
 
-5. The Brisca game will ask you to start the game in server mode (listening for clients connections) or in client mode (to play as in a two player's game).
+5. The program will ask you to start the game in server mode (listening for clients connections) or in client mode (to play as in a two player's game).
 
+6. In server mode, the program will listen at its local IP address and port 2000.
+
+7. In client mode, the program will let you specify the IP address of the server, the port is assumed to be 2000.
 
 You can run three instances of FUSE like this, one running as a server and the other 2 as clients.
 
 If the client(s) and server are located in different computers, please make sure that you can join the server IP address at port 2000. 
 
->When running the three instances locally, the second client sometimes receives a SOCKET error, in this case running the client again with `RUN 9998` will fix it.
-
->The instance running the server will PRINT some debugging commands during the game, the most important one is the card's stock.
+>The instance running the server will PRINT some debugging commands during the game, like the card's stock, the number of played rounds and the variable `turn` which signals who plays first.
 
 # Special thanks
 
