@@ -1,6 +1,7 @@
 # spectrum-brisca
 
-[The "Brisca", also known as "Berisca"](https://en.wikipedia.org/wiki/Brisca) is a popular Spanish card game played by two teams of two with a 40-card Spanish-suited pack.
+[The "Brisca", also known as "Berisca"](https://en.wikipedia.org/wiki/Brisca) is a popular Spanish card game played by two teams of 2 players (4 players in total) with a 40-card Spanish-suited pack.
+The game can also be played with only 2 or 3 players, with 3 players there is a card that needs to be removed from the stock.
 
 This brisca game implementation for the ZX Spectrum is a simplified 1-vs-1 networking version of the original "Brisca" card's game, as it is usually played in the north regions of Spain. 
 
