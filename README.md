@@ -167,7 +167,11 @@ The communication from client to server only happens to send to the server the c
 
 ### Issues
 
-In order to not block forever the server waiting for clients to play, a timeout has been implemented. If a client takes more than 30 seconds to send something, the server will abort both connections and it will start over, resetting the game.
+The current FUSE release (1.6.0) has a bug accepting clients connections. The "conn" socket message on the listening socket is never received, so for the clients connections to be accepted I need to send something which is  discarded afterwards by the server.
+
+There is a bug in my code, if the client connects and disconnects inmediately, it is not handled correctly. I should check for "disconn" message on the listening socket (#4) and if that happens I should %close it and re-listen again.
+
+In order to not block forever the server waiting for clients to play, a timeout has been implemented. If a client takes more than 30 seconds to send something, the server will abort both connections and it will start over, resetting the game. The 30 seconds starts to count at the end of the round, so even if you don't press ENTER to continue to the next round, the countdown is running, and you have to wait for the drawing of cards, so maybe this timeout should be increased. In any case you are warned : do not hesitate for long to play, otherwise the server will reset itself :)
 
 
 # How to run
