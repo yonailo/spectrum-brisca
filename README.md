@@ -16,7 +16,7 @@ This brisca game implementation for the ZX Spectrum is a simplified 1-vs-1 netwo
 * [Brisca rules](#brisca-rules)
 * [Repository file structure](#repository-file-structure)
 * [Development](#development)
-* [How to run the game](#how-to-run)
+* [How to run the game](#how-to-run-the-game)
 * [Special thanks](#special-thanks)
 
 # Brisca rules
