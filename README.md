@@ -182,24 +182,21 @@ You can not play against the computer, there must be two clients and a server.
 
 I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS_server) from where you can spawn the game directly. The following list describes the easiest way to run the game :
 
-1. Open [this file](spectranet/spectranet_setIPandReset.szx) with FUSE.
+1. Open [spectranet/spectranet_setIPandReset.szx](https://github.com/yonailo/spectrum-brisca/releases/download/1.0/spectranet_setIPandReset.szx) with FUSE.
 2. Configure your local IP address, network mask and gateway.
 3. Connect to my spectranet TNFS server and load the boot program :
 ```
 %mount 0,"spectranet.tuxe.es"
 %load ""
 ```
-4. Launch the Brisca game pressing "S". The booting code will launch [this SNA file](spectranet/spectranet.tuxe.es/brisca.sna).
+4. Launch the Brisca game pressing "S".
 
 5. The program will ask you to start the game in server mode (listening for clients connections) or in client mode (to play as in a two player's game).
+   * In server mode, the program will listen at its local IP address and port 2025.
+   * In client mode, the program will let you specify the IP address of the server, the port is assumed to be 2025.
 
-6. In server mode, the program will listen at its local IP address and port 2025.
-
-7. In client mode, the program will let you specify the IP address of the server, the port is assumed to be 2025.
-
-8. There is a server instance constinuously running on "tuxe.es".
-
-You can run three instances of FUSE like this, one running as a server and the other 2 as clients.
+You can run three instances of FUSE like this, one running as a server and the other 2 as clients. If you don't want to run your own server instance,
+there is a server instance constinuously running on "tuxe.es". You can try to connect to it.
 
 If the client(s) and server are located in different computers, please make sure that you can join the server IP address at port 2025. 
 
