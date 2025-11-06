@@ -184,8 +184,9 @@ I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS
 
 1. Open [spectranet/spectranet_setIPandReset.szx](https://github.com/yonailo/spectrum-brisca/releases/download/1.0/spectranet_setIPandReset.szx) with FUSE.
 2. Configure your local IP address, network mask and gateway.
-3. Connect to my spectranet TNFS server and load the boot program :
+3. Without restarting, connect to my spectranet TNFS server and load the boot program :
 ```
+%umount 0
 %mount 0,"spectranet.tuxe.es"
 %load ""
 ```
