@@ -37,7 +37,7 @@ All other cards account for zéro points. The winner of the last round is the fi
 
 Note that playing the highest card is not mandatory, neither playing the same suit.
 
-The game ends when there are no more cards in the stock and all hand's cards have been played. A draw can be achieved with 60 points only.
+The game ends when there are no more cards in the stock and all hand's cards have been played. In a one vs one game, a draw can only be achieved with 60 points.
 
 # Repository file structure
 
@@ -63,9 +63,9 @@ The repository's files are :
 ┃ ┃ ┣ 🗒 boot.zx : autoload file
 ┃ ┃ ┣ 🗒 brisca.sna : snapshot launched by boot.zx
 ┃ ┃ ┣ 🗒 server.szx : server-only version for tuxe.es
-┣ 🗒 brisca.bas : BASIC code
-┣ 🗒 brisca.szx : snapshot 
-┣ 🗒 brisca.tap : TAP file
+┣ 🗒 brisca.bas : Brisca BASIC code
+┣ 🗒 brisca.szx : Brisca SZX snapshot 
+┣ 🗒 brisca.tap : Brisca TAP file
 ```
 
 # Development
@@ -127,8 +127,8 @@ The c integer array contains for each card its INK & PAPER colors, its drawing s
 The cards are identified with numeric IDs
 * [1..10] : coin suit (1 -> Ace, 8 -> Jack, 9 -> Knight, 10 -> King)
 * [11..20] : coups suit (11 -> Ace, 18 -> Jack, 19 -> Knight, 20 -> King)
-* [21..30] : coups suit (21 -> Ace, 28 -> Jack, 29 -> Knight, 30 -> King)
-* [31..40] : coups suit (31 -> Ace, 38 -> Jack, 39 -> Knight, 40 -> King)
+* [21..30] : swords suit (21 -> Ace, 28 -> Jack, 29 -> Knight, 30 -> King)
+* [31..40] : clubs suit (31 -> Ace, 38 -> Jack, 39 -> Knight, 40 -> King)
 
 In order to improve the randomness of the cards' stock shuffling, there is a `RANDOMIZE 0` just before entering into server mode. 
 
@@ -138,7 +138,7 @@ The server orchestrates both clients. It communicates what the other end has pla
 
 ![networked game](images/image3.png)
 
-The game is made to be played with spectranet's rom. At this moment only FUSE supports spectranet's rom. The [procedure described here](https://sourceforge.net/p/fuse-emulator/wiki/Spectranet%20Emulation/) in order to install the spectranet firmware with FUSE does not work with the FUSE 1.6.0. You will find [here](spectranet/spectranet_setIPandReset.szx) a prebuilt snapshot that allows you to configure your IP address and your gateway (NOTE that the FUSE implementation does not support DHCP yet.). You might need to install the [FUSE roms](spectranet/fuse/roms.zip) available within this repository too.
+The game is made to be played with the spectranet's rom. At this moment only FUSE supports the spectranet's firmware. The [procedure described here](https://sourceforge.net/p/fuse-emulator/wiki/Spectranet%20Emulation/) in order to install the spectranet firmware with FUSE does not work with the FUSE 1.6.0. You will find [here](https://github.com/yonailo/spectrum-brisca/releases/download/1.0/spectranet_setIPandReset.szx) a prebuilt snapshot that allows you to configure your IP address and your gateway (NOTE that the FUSE implementation does not support DHCP yet.). You might need to install the [FUSE roms](spectranet/fuse/roms.zip) available within this repository too.
 
 ### Sockets
 
@@ -146,13 +146,13 @@ In server mode, the game listens on port 2025. It allows only 2 clients, which a
 
 The clients can specify the remote DNS name or IP address in order to connect to the server.
 
-The game starts when at least 2 clients are connected. Both the clients and the server read data using a [control socket](https://spectrum.alioth.net/doc/index.php/Guide) for not blocking waiting for input.
+The game starts when at least 2 clients are connected. Both the clients and the server read data polling a [control socket](https://spectrum.alioth.net/doc/index.php/Guide) for not blocking waiting for input.
 
 ### Message's exchange
 
 The game is managed by the server, it is the server which shuffles the stock of cards and who distributes them to each client. The server computes the winner at each round, decides who plays next and at the end signals the winner and loser.
 
-The communication is made of multiple commandes exchanged between the parties :
+The communication is made of multiple commands exchanged between the parties :
 
 * (s>c) `CARD` + (s>c) `<cardid>`
 * (s>c) `TRUMP` + (s>c) `<trumpid>`
@@ -163,13 +163,39 @@ The communication is made of multiple commandes exchanged between the parties :
 
 >(s>c) means "the server sends to the client"
 
-As it is not easy to manipulate strings with the ZX Spectrum, some messages are made of two writes to the communication channel, the first one is the command (i.e. "CARD") and the second write is a value.
+As it is not easy to manipulate strings with the ZX Spectrum, some messages are made of two writes to the communication channel (socket), the first one is the command (i.e. "CARD") and the second write is a value.
 
 The communication from client to server only happens to send to the server the card that the user has played, only after receiving a "PLAY" command from the server.
 
 ### Issues
 
-The current FUSE release (1.6.0) has a bug accepting clients connections. The "conn" socket message on the listening socket is never received, so for the clients connections to be accepted I need to send something which is  discarded afterwards by the server.
+The current FUSE release (1.6.0) has a bug accepting clients connections. The "conn" socket message on the listening socket is never received, so for the clients connections to be accepted I need to send something which is discarded afterwards by the server.
+
+You can patch the current 1.6.0 FUSE release with this patch :
+
+```
+diff --git "a/peripherals/nic/w5100_socket.c" "b/peripherals/nic/w5100_socket.c"
+index 8f1db4c9..28ea9cb6 100644
+--- "a/peripherals/nic/w5100_socket.c"
++++ "b/peripherals/nic/w5100_socket.c"
+@@ -617,6 +617,7 @@ w5100_socket_process_accept( nic_w5100_socket_t *socket )
+
+   socket->fd = new_fd;
+   socket->state = W5100_SOCKET_STATE_ESTABLISHED;
++  socket->ir |= 1 << 0;
+ }
+
+ static void
+@@ -669,6 +670,7 @@ w5100_socket_process_read( nic_w5100_socket_t *socket )
+   }
+   else if( bytes_read == 0 ) {  /* TCP */
+     socket->state = W5100_SOCKET_STATE_CLOSE_WAIT;
++    socket->ir |= 1 << 1;
+     nic_w5100_debug( "w5100: EOF on %s socket %d; errno %d: %s\n",
+                      description, socket->id, compat_socket_get_error(),
+                      compat_socket_get_strerror() );
+```
+(credits go for @ZXGuesser)
 
 
 The server polls the control socket for client's messages. A timeout has been implemented to not block the server indefinitely. If a client takes more than 1 minute and 30 seconds to send something, the server will abort both connections and it will start over, resetting the game. 
