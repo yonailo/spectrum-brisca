@@ -16,7 +16,7 @@ This brisca game implementation for the ZX Spectrum is a simplified 1-vs-1 netwo
 * [Brisca rules](#brisca-rules)
 * [Repository file structure](#repository-file-structure)
 * [Development](#development)
-* [How to run](#how-to-run)
+* [How to run the game](#how-to-run)
 * [Special thanks](#special-thanks)
 
 # Brisca rules
@@ -62,6 +62,7 @@ The repository's files are :
 ┃ ┣ 📁 spectranet.tuxe.es : TNFS server files
 ┃ ┃ ┣ 🗒 boot.zx : autoload file
 ┃ ┃ ┣ 🗒 brisca.sna : snapshot launched by boot.zx
+┃ ┃ ┣ 🗒 server.szx : server-only version for tuxe.es
 ┣ 🗒 brisca.bas : BASIC code
 ┣ 🗒 brisca.szx : snapshot 
 ┣ 🗒 brisca.tap : TAP file
@@ -141,7 +142,7 @@ The game is made to be played with spectranet's rom. At this moment only FUSE su
 
 ### Sockets
 
-In server mode, the game listens on port 2000. It allows only 2 clients, which are identified with channels #6 and #7 respectively.
+In server mode, the game listens on port 2025. It allows only 2 clients, which are identified with channels #6 and #7 respectively.
 
 The clients can specify the remote DNS name or IP address in order to connect to the server.
 
@@ -170,14 +171,12 @@ The communication from client to server only happens to send to the server the c
 
 The current FUSE release (1.6.0) has a bug accepting clients connections. The "conn" socket message on the listening socket is never received, so for the clients connections to be accepted I need to send something which is  discarded afterwards by the server.
 
-There is a bug in my code, if the client connects and disconnects inmediately, it is not handled correctly. I should check for "disconn" message on the listening socket (#4) and if that happens I should %close it and re-listen again.
 
-The server polls the control socket for client's messages. A timeout has been implemented to not block the server indefinitely. If a client takes more than 30 seconds to send something, the server will abort both connections and it will start over, resetting the game. The 30 seconds begin to count at the end of the round, so even if you don't press ENTER to continue to the next round, the countdown is running, and you will have to spend some time waiting for the drawing of the new card, so maybe this timeout should be increased. In any case you are warned : do not hesitate for long to play, otherwise the server will reset itself :)
+The server polls the control socket for client's messages. A timeout has been implemented to not block the server indefinitely. If a client takes more than 1 minute and 30 seconds to send something, the server will abort both connections and it will start over, resetting the game. 
 
+# How to run the game
 
-# How to run
-
-The game can be run in client or server mode. The server mode will start listening for connections at port 2000. The port is not configurable.
+The game can be run in client or server mode. The server mode will start listening for connections at port 2025. The port is not configurable.
 
 You can not play against the computer, there must be two clients and a server.
 
@@ -194,13 +193,15 @@ I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS
 
 5. The program will ask you to start the game in server mode (listening for clients connections) or in client mode (to play as in a two player's game).
 
-6. In server mode, the program will listen at its local IP address and port 2000.
+6. In server mode, the program will listen at its local IP address and port 2025.
 
-7. In client mode, the program will let you specify the IP address of the server, the port is assumed to be 2000.
+7. In client mode, the program will let you specify the IP address of the server, the port is assumed to be 2025.
+
+8. There is a server instance constinuously running on "tuxe.es".
 
 You can run three instances of FUSE like this, one running as a server and the other 2 as clients.
 
-If the client(s) and server are located in different computers, please make sure that you can join the server IP address at port 2000. 
+If the client(s) and server are located in different computers, please make sure that you can join the server IP address at port 2025. 
 
 >The instance running the server will PRINT some debugging commands during the game, like the card's stock, the number of played rounds and the variable `turn` which signals who plays first.
 
