@@ -199,7 +199,7 @@ I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS
    * In client mode, the program will let you specify the IP address of the server, the port is assumed to be 2025.
 
 You can run three instances of FUSE like this, one running as a server and the other 2 as clients. If you don't want to run your own server instance,
-there is a server instance constinuously running on "tuxe.es". You can try to connect to it.
+<ins>there is a server instance constinuously running on "tuxe.es"<ins>. You can try to connect to it.
 
 If the client(s) and server are located in different computers, please make sure that you can join the server IP address at port 2025. 
 
