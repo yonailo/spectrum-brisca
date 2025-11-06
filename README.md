@@ -185,7 +185,7 @@ I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS
 1. Open [spectranet/spectranet_setIPandReset.szx](https://github.com/yonailo/spectrum-brisca/releases/download/1.0/spectranet_setIPandReset.szx) with FUSE.
 2. Configure your local IP address, network mask and gateway.
 3. Reset the machine (F5). 
-   * If the networks works, you will see the markround.com TNFSD server which is configured by default.
+   * If the networks works, you will see the markround.com TNFS server which is configured by default.
 4. Exit to BASIC and connect to my spectranet TNFS server, and load the boot program :
 ```
 %umount 0
