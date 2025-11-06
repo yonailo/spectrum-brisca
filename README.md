@@ -184,15 +184,17 @@ I have configured a [TNFS server](https://spectrum.alioth.net/doc/index.php/TNFS
 
 1. Open [spectranet/spectranet_setIPandReset.szx](https://github.com/yonailo/spectrum-brisca/releases/download/1.0/spectranet_setIPandReset.szx) with FUSE.
 2. Configure your local IP address, network mask and gateway.
-3. Without restarting, connect to my spectranet TNFS server and load the boot program :
+3. Reset the machine (F5). 
+   * If the networks works, you will see the markround.com TNFSD server which is configured by default.
+4. Exit to BASIC and connect to my spectranet TNFS server, and load the boot program :
 ```
 %umount 0
 %mount 0,"spectranet.tuxe.es"
 %load ""
 ```
-4. Launch the Brisca game pressing "S".
+5. Launch the Brisca game pressing "S".
 
-5. The program will ask you to start the game in server mode (listening for clients connections) or in client mode (to play as in a two player's game).
+6. The program will ask you to start the game in server mode (listening for clients connections) or in client mode (to play as in a two player's game).
    * In server mode, the program will listen at its local IP address and port 2025.
    * In client mode, the program will let you specify the IP address of the server, the port is assumed to be 2025.
 
