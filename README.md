@@ -56,6 +56,8 @@ The repository's files are :
 ┃ ┣ 🗒 screen-presentation-by-DOkky.src
 ┣ 📁 images  : images for the README.md
 ┃ ┣ 🗒 ...
+┣ 📁 originals  : images for each card.
+┃ ┣ 🗒 ...
 ┣ 📁 spectranet : prebuilt images & fuse roms
 ┃ ┣ 📁 fuse
 ┃ ┃ ┣ 🗒 roms.zip
